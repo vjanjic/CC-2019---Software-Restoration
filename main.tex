@@ -36,14 +36,14 @@
 
 
 \begin{document}
-\title{Pattern Discovery Paper}
+\title{Software Restoration of Legacy-Parallel Pthreads Parallel Applications}
 \titlenote{Produces the permission block, and
   copyright information}
 \subtitle{Extended Abstract}
 %\subtitlenote{The full version of the author's guide is available as
   %\texttt{acmart.pdf} document}
 
-\author{Discovery People}
+\author{Discovery St Andrews People}
 \authornote{Some note about Discovery People}
 \orcid{1234-5678-9012}
 \affiliation{%
@@ -154,6 +154,24 @@
 
 
 \maketitle
+
+\section{Introduction}
+
+\noindent
+Parallel patterns are well established high-level parallel programming model for producing portable, maintainable, adaptive and efficient parallel code. They have been endorsed by some of the biggest IT companies, such as Intel and Microsfot, who have developed their own parallel pattern libraries (Intel TBB, Microsoft PPL etc.) A standard way of using these libraries is to start from the sequential code, identifying portions of the code that are amenable to parallelisation together with the exact parallel patternt to be applied, and then inserting calls to the identified patterns, after possibly restructuring the code to accommodate for parallelism. Sequential code gives the cleanest starting point for introduction of parallel patterns. There is, however, a large base of existing legacy code that was parallelised using lower-level, mostly ad-hoc parallelisation methods and libraries, such as pThreads. This code is usually tailored to one specific parallelisation and system architecture, with highly-specific and tuned data structures which prevent alternative (possibly more efficient parallelisations) or portability to different platforms. Also, code maintainance requires intricate knowledge about the system architecture and various low-level underlying mechanisms such as thread creation, synchronisation and scheduling. Introducing structured parallelism in form of parallel patterns into legacy-parallel code would bring numerous benefits in terms of maintainability and adaptivity to different systems. This is, however, a daunting task due to various factors, such as incompatibility between different threading libraries, high specialisation and tuning of the legacy code, usage of very specific data structures etc.
+
+
+This paper presents a novel mechanism of \emph{software restoration}. Software restoration is removal of (undesirable) parallelism from the legacy-parallel code and elimination of the auxilary parallelism-specific data structures from it. The goal of restoration is to put the code in clean shape where structured parallelisation using parallel patterns can be applied. Software restoration is based on program analysis and software refactoring techniques. It is a semi-automated method that guide the programmer through the whole process of i) removing constructs to create and manage parallel threads; and, ii) removing the parallelisation-specific data structures that may present obstacle in discovery and introduction of structured parallelism. We evaluate our approach on a number of parallel applications, parallelised using pThreads library. We demonstrate that we are able to restructure the code and obtain the clean version onto which pattern discovery tools, and further pattern introduction/tuning refactoring can be applied to obtain efficient, portable and maintainable parallel code.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.5\textwidth]{SoftwareRestoration.pdf}
+  \end{center}
+  \vspace{-0.5cm}
+  \caption{Software Restoration Process}
+  \label{fig:SoftRest}
+
+\end{figure}
 
 %\input{samplebody-conf}
 
